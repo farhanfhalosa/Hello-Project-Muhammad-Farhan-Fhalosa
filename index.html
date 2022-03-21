@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+    <title>TP3_1301194411</title>
+</head>
+
+<body>
+    <h2>SOAL 1</h2>
+
+    <form id="basic-form">
+        <p>
+            <label for="time"><span>VALIDATOR JAM (harus 00:00 - 23:59) :</span></label>
+            <input type="text" id="time" name="time">
+            <button class="submit">Cek</button>
+        </p>
+    </form>
+    <br>
+    <h2>SOAL 2</h2>
+    <div class="content" id="content" style="border: 1px dashed;">
+        <p>Halo 1</p>
+        <form id="form-text">
+            <input type="text" id="text">
+            <button class="tambah1">Tambah</button>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".submit").click(function (e) {
+                // e.preventDefault();
+                let time = document.getElementById("time").value;
+                if (time == "") {
+                    alert("Jam kosong")
+                } else {
+                    if (time.length != 4 && time[2] != ":") {
+                        alert("Format Jam Salah")
+                    } else {
+                        let jam = parseInt(time.substring(0, 2))
+                        let menit = parseInt(time.substring(3, 6))
+                        if (jam > 23 || menit > 59) {
+                            if (jam > 23) {
+                                alert("Jam Salah")
+                            }
+                            if (menit > 59) {
+                                alert("Menit Salah")
+                            }
+                        } else {
+                            if (menit > 59) {
+                                alert("Menit Salah")
+                            }
+                            if (jam >= 0 && jam <= 3) {
+                                alert("Jam " + jam + " malam lewat " + menit + " menit")
+                            }
+                            if (jam >= 4 && jam <= 10) {
+                                alert("Jam " + jam + " pagi lewat " + menit + " menit")
+                            }
+                            if (jam >= 11 && jam <= 14) {
+                                if (jam >= 12) jam = jam - 12;
+                                alert("Jam " + jam + " siang lewat " + menit + " menit")
+                            }
+                            if (jam >= 15 && jam <= 18) {
+                                if (jam >= 12) jam = jam - 12;
+                                alert("Jam " + jam + " sore lewat " + menit + " menit")
+                            }
+                            if (jam >= 19 && jam <= 23) {
+                                if (jam >= 12) jam = jam - 12;
+                                alert("Jam " + jam + " malam lewat " + menit + " menit")
+                            }
+                        }
+                    }
+                }
+            });
+
+            $(".tambah1").click(function (e) {
+                e.preventDefault();
+                let para = document.createElement("p");
+                let text = document.getElementById("text").value;
+                let node = document.createTextNode(text);
+                para.appendChild(node);
+                let element = document.getElementById("content");
+                if (text == "") {
+                    alert("Input Kosong")
+                } else {
+                    element.prepend(para);
+                    document.getElementById("text").value = "";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
